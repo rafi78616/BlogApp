@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 export const getAllBlogs = async(req,res,next) =>{
     let blogs;
     try{
-        blogs = await Blog.find();
+        blogs = await Blog.find().populate("user");
     }catch(err){
         return console.log(err);
     }
@@ -109,5 +109,5 @@ export const getByUserId = async(req,res,next) =>{
     if(!userBlogs){
         return res.status(404).json({message : "No Blogs Found"})
     }
-    return res.status(200).json({blogs : userBlogs})
+    return res.status(200).json({user : userBlogs})
 }
